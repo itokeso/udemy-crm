@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:1.22.1
+    container_name: udemy_crm_nginx
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+    volumes:
+      - ./env/nginx/server.conf:/etc/nginx/conf.d/default.conf
+      - ../:/var/www/html
+
+  app:
+    build: env/app
+    container_name: udemy_crm_app
+    ports:
+      - 6003:6002
+    volumes:
+      - ../:/var/www/html
+      - ./env/app/php.ini:/usr/local/etc/php/php.ini
+    env_file:
+      - ./env/app/.env
+
+  db:
+    image: mysql
+    container_name: udemy_crm_db
+    ports:
+      - 3312:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    env_file:
+      - ./env/db/.env
+
+volumes:
+  mysql:
+    name: udemy_crm_db_volume
+    driver: local
