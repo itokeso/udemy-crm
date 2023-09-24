@@ -16,6 +16,7 @@ services:
     container_name: udemy_crm_app
     ports:
       - 6003:6002
+      - 5173:5173
     volumes:
       - ../:/var/www/html
       - ./env/app/php.ini:/usr/local/etc/php/php.ini

@@ -1,4 +1,5 @@
 FROM php:8.1.13-fpm-bullseye
+EXPOSE 5173
 COPY ./php.ini /usr/local/etc/php/
 
 # Install extensions for php.
